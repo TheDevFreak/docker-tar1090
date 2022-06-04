@@ -15,6 +15,9 @@ sed -i.original \
 sed -i '/location \/data\/ {/a \ \ access_log off;' \
     "${TAR1090_INSTALL_DIR}/nginx.conf"
 
+# Add basic auth
+sed -i.original -e "/location \/ {/a\\  auth_basic \"Planes\";\n  auth_basic_user_file /var/users;" "${TAR1090_INSTALL_DIR}/nginx.conf"
+
 # Modify tar1090 settings
 sed -i.original \
   -e 's/skyview978/skyaware978/' \
