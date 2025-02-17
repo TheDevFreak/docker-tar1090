@@ -285,6 +285,9 @@ do
 
     cd "$dir"
 
+    #Add Basic Auth / CF config
+    sed -i.original -e "/location \/ {/a\\  real_ip_header CF-Connecting-IP;\n  auth_basic \"Planes\";\n  auth_basic_user_file /var/users;" nginx.conf
+
     cp nginx.conf "$ipath/nginx-${service}.conf"
 
     if [[ $lighttpd == yes ]]; then
